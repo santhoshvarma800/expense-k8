@@ -95,7 +95,7 @@ data:
 ---
 
 kind: Deployment
-apiVersion: v1
+apiVersion: apps/v1
 metadata:
  name: frontend
  namespace: expense
