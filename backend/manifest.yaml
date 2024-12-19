@@ -24,7 +24,7 @@ spec:
      project: expense
      component: backend
      tier: app
-  template:
+template:
     metadata:
      labels:
        project: expense
@@ -50,7 +50,7 @@ spec:
    project: expense
    component: backend
    tier: app
-  ports:
+ ports:
   - protocol: TCP
     port: 8080
     targetPort: 8080

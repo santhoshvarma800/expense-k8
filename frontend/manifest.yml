@@ -120,13 +120,12 @@ spec:
      containers:
      - name: frontend
        image: joindevops/frontend:v1.0
-    volumeMounts:
+   volumeMounts:
      - name: nginx-conf
        mountPath: /etc/nginx/nginx.conf
        subPath: nginx.conf
        readOnly: true
-  
-    volumes:
+   volumes:
      - name: nginx-conf
        configMap:
         name: frontend

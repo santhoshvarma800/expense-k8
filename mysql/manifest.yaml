@@ -14,7 +14,7 @@ spec:
      project: expense
      component: mysql
      tier: db
-  template:
+template:
     metadata:
      labels:
        project: expense
