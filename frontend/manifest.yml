@@ -1,10 +1,10 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
- name: frontend
- namespace: expense
+  name: frontend
+  namespace: expense
 data:
- nginx.conf: |
+  nginx.conf: |
     user www-data;
     worker_processes 4;
     pid /var/run/nginx.pid;
@@ -88,64 +88,63 @@ data:
             proxy_pass http://backend:8080/;
         }
 
-        }
+      }
 
     }
 
 ---
-kind: Deployment
 apiVersion: apps/v1
+kind: Deployment
 metadata:
- name: frontend
- namespace: expense
- labels:
-  project: expense
-  component: frontend
-  tier: webapp
+  name: frontend
+  namespace: expense
+  labels:
+    project: expense
+    component: frontend
+    tier: webapp
 spec:
- replicas: 2
- selector:
-  matchingLabels:
-   project: expense
-   component: frontend
-   tier: webapp
- template:
-   metadata:
-    labels:
+  replicas: 2
+  selector:
+    matchLabels:
       project: expense
       component: frontend
       tier: webapp
-   spec:
-     containers:
-     - name: frontend
-       image: joindevops/frontend:v1.0
-       volumeMounts:
-       - name: nginx-conf
-         mountPath: /etc/nginx/nginx.conf
-         subPath: nginx.conf
-         readOnly: true
+  template:
+    metadata:
+      labels:
+        project: expense
+        component: frontend
+        tier: webapp
+    spec:
+      containers:
+      - name: frontend
+        image: joindevops/frontend:v1.0
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf
+          readOnly: true
       volumes:
       - name: nginx-conf
         configMap:
-         name: frontend
-         items:
-         - key: nginx.conf
-           path: nginx.conf
-     
+          name: frontend
+          items:
+          - key: nginx.conf
+            path: nginx.conf
 
 ---
 kind: Service
 apiVersion: v1
 metadata:
- name: forntend
- namespace: expense
+  name: frontend
+  namespace: expense
 spec:
- type: LoadBalancer
- selector:
-   project: expense
-   component: frontend
-   tier: webapp
- ports:
- - protocol: TCP
-   port: 80
-   targetPort: 8080
+  type: LoadBalancer
+  selector:
+    project: expense
+    component: frontend
+    tier: webapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
