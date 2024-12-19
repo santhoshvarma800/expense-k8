@@ -103,7 +103,7 @@ metadata:
     component: frontend
     tier: webapp
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       project: expense
