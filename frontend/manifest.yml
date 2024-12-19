@@ -120,18 +120,18 @@ spec:
      containers:
      - name: frontend
        image: joindevops/frontend:v1.0
-   volumeMounts:
-     - name: nginx-conf
-       mountPath: /etc/nginx/nginx.conf
-       subPath: nginx.conf
-       readOnly: true
-   volumes:
-     - name: nginx-conf
-       configMap:
-        name: frontend
-        items:
-        - key: nginx.conf
-          path: nginx.conf
+       volumeMounts:
+       - name: nginx-conf
+         mountPath: /etc/nginx/nginx.conf
+         subPath: nginx.conf
+         readOnly: true
+      volumes:
+      - name: nginx-conf
+        configMap:
+         name: frontend
+         items:
+         - key: nginx.conf
+           path: nginx.conf
      
 
 ---
@@ -148,6 +148,6 @@ spec:
    component: frontend
    tier: webapp
  ports:
- - Protocol: TCP
-    port: 80
-    targetPort: 8080
+ - protocol: TCP
+   port: 80
+   targetPort: 8080
