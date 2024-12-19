@@ -7,8 +7,7 @@ data:
  DB_HOST: mysql
 
 ---
-
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
  name: backend
@@ -39,7 +38,6 @@ spec:
           name: backend
 
 ---
-
 kind: Service
 apiVersion: v1
 metadata:
