@@ -93,7 +93,6 @@ data:
     }
 
 ---
-
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -135,7 +134,6 @@ spec:
      
 
 ---
-
 kind: Service
 apiVersion: v1
 metadata:
